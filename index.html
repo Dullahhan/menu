@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Carta del Restaurante</title>
+    <style>
+        @font-face {
+            font-family: 'Great Vibes';
+            src: url('fonts/letra.woff2') format('truetype');
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('img/mesa.jpeg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Georgia', serif;
+            overflow: hidden;
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+        .container {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: #fff;
+            padding: 20px;
+        }
+        #welcome-message {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            color: #fff;
+            text-align: center;
+            padding: 40px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+        .animated-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 48px;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            color: #ffcc00;
+            opacity: 0;
+            animation: slideUpTitle 0.5s ease forwards;
+        }
+        .animated-text {
+            font-family: 'Georgia', serif;
+            font-size: 20px;
+            max-width: 800px;
+            margin: 15px 0 0;
+            line-height: 1.6;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            animation: slideUpText 0.5s ease forwards 0.2s;
+            white-space: normal;
+        }
+        @keyframes slideUpTitle {
+            0% { opacity: 0; transform: translateY(100vh); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideUpText {
+            0% { opacity: 0; transform: translateY(100vh); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 64px;
+            color: #ffcc00;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            font-size: 24px;
+            font-family: 'Georgia', serif;
+            text-decoration: none;
+            color: #fff;
+            background: linear-gradient(135deg, #d9534f, #c9302c);
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            animation: slideUp 0.5s ease forwards;
+        }
+        .btn:nth-child(1) { animation-delay: 0.2s; }
+        .btn:nth-child(2) { animation-delay: 0.4s; }
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideUp {
+            0% { opacity: 0; transform: translateY(50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .hidden { visibility: hidden; }
+        @media (max-width: 768px) {
+            .title { font-size: 48px; }
+            .btn { font-size: 20px; padding: 12px 30px; }
+            .animated-title { font-size: 36px; }
+            .animated-text { font-size: 18px; }
+        }
+        @media (max-width: 480px) {
+            .title { font-size: 36px; margin-bottom: 30px; }
+            .buttons { flex-direction: column; gap: 15px; }
+            .btn { font-size: 18px; padding: 10px 25px; }
+            .animated-title { font-size: 28px; }
+            .animated-text { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div id="welcome-message">
+		<h1 class="animated-title">Bienvenido al Rincón del Paladar</h1>
+		<p class="animated-text">Un lugar donde los sabores se encuentran y el placer comienza.</p>
+	</div>
+    <div class="overlay"></div>
+    <div class="container">
+        <h1 class="title">Nuestra Carta</h1>
+        <div class="buttons">
+            <a href="pizzas.html" class="btn">Pizzas</a>
+            <a href="cafe.html" class="btn">Café</a>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const welcomeMessage = document.getElementById("welcome-message");
+            const hideWelcomeMessage = (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                welcomeMessage.classList.add("hidden");
+                document.removeEventListener("click", hideWelcomeMessage);
+                document.removeEventListener("touchstart", hideWelcomeMessage);
+            };
+            document.addEventListener("click", hideWelcomeMessage);
+            document.addEventListener("touchstart", hideWelcomeMessage);
+        });
+    </script>
+</body>
+</html>

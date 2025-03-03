@@ -1,0 +1,342 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Carta de Pizzas Circular</title>
+    <link href="scripts/1.css" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'Great Vibes';
+            src: url('fonts/letra.woff2') format('truetype');
+        }
+        body {
+            background: url('img/mesa.jpeg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        .container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .book {
+            position: relative;
+            width: 90vw;
+            height: 90vw;
+            max-width: 525px;
+            max-height: 525px;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+        .page {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            left: 50%;
+            transform-origin: left center;
+            background: linear-gradient(to right, #fffef0, #f5d9b0);
+            border: 2px solid #d9534f;
+            border-radius: 0 350px 350px 0;
+            transition: transform 0.3s ease;
+            transform: rotateY(0deg);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            user-select: none;
+            transform-style: preserve-3d;
+            z-index: 1;
+        }
+        .page .front, .page .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-size: contain;
+            background-position: center;
+        }
+        .page .front {
+            font-family: 'Georgia', serif;
+            font-size: 20px;
+            color: #5c4033;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .page .back {
+            transform: rotateY(180deg);
+        }
+        .page .front .price {
+            font-family: 'Georgia', serif;
+            font-size: 20px;
+            color: #fff;
+            text-shadow: 
+                -1px -1px 0 #000,  
+                1px -1px 0 #000,  
+                -1px 1px 0 #000,  
+                1px 1px 0 #000,
+                0px 0px 5px rgba(0, 0, 0, 0.7);
+            margin-top: 10px;
+        }
+        .page:nth-child(1) .front { background: url('img/portada.png') no-repeat center center; background-size: cover; text-indent: -9999px; }
+        .page:nth-child(1) .back { background: url('img/pizzas/queso_1.png') no-repeat center center; background-size: cover; }
+        .page:nth-child(2) .front { background: url('img/pizzas/queso_2.png') no-repeat center center; background-size: cover; color: #ff0000; font-family: 'Great Vibes', cursive; font-size: 36px; text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0px 0px 15px rgba(0, 0, 0, 0.9); }
+        .page:nth-child(2) .back { background: url('img/pizzas/quesoX2_1.png') no-repeat center center; background-size: cover; }
+        .page:nth-child(3) .front { background: url('img/pizzas/quesoX2_2.png') no-repeat center center; background-size: cover; color: #ff0000; font-family: 'Great Vibes', cursive; font-size: 36px; text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0px 0px 15px rgba(0, 0, 0, 0.9); text-indent: 0; }
+        .page:nth-child(3) .back { background: url('img/pizzas/Vegetariana_1.png') no-repeat center center; background-size: cover; }
+        .page:nth-child(4) .front { background: url('img/pizzas/Vegetariana_2.png') no-repeat center center; background-size: cover; color: #ff0000; font-family: 'Great Vibes', cursive; font-size: 36px; text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0px 0px 15px rgba(0, 0, 0, 0.9); text-indent: 0; }
+        .page:nth-child(4) .back { background: url('img/pizzas/salchicha_1.png') no-repeat center center; background-size: cover; }
+        .page:nth-child(5) .front { background: url('img/pizzas/salchicha_2.png') no-repeat center center; background-size: cover; color: #ff0000; font-family: 'Great Vibes', cursive; font-size: 36px; text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0px 0px 15px rgba(0, 0, 0, 0.9); text-indent: 0; }
+        .page:nth-child(5) .back { background: url('img/pizzas/hawaiana_1.png') no-repeat center center; background-size: cover; }
+        .page:nth-child(6) .front { background: url('img/pizzas/hawaiana_2.png') no-repeat center center; background-size: cover; color: #ff0000; font-family: 'Great Vibes', cursive; font-size: 36px; text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0px 0px 15px rgba(0, 0, 0, 0.9); text-indent: 0; }
+        .page:nth-child(6) .back { background: url('img/pizzas/pollo_1.png') no-repeat center center; background-size: cover; }
+        .page:nth-child(7) .front { background: url('img/pizzas/pollo_2.png') no-repeat center center; background-size: cover; color: #ff0000; font-family: 'Great Vibes', cursive; font-size: 36px; text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0px 0px 15px rgba(0, 0, 0, 0.9); text-indent: 0; }
+        .page:nth-child(7) .back { background: url('img/pizzas/jamon_1.png') no-repeat center center; background-size: cover; }
+        .page:nth-child(8) .front { background: url('img/pizzas/jamon_2.png') no-repeat center center; background-size: cover; color: #ff0000; font-family: 'Great Vibes', cursive; font-size: 36px; text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0px 0px 15px rgba(0, 0, 0, 0.9); text-indent: 0; }
+        .page:nth-child(8) .back { background: url('img/pizzas/especial_1.png') no-repeat center center; background-size: cover; }
+        .page:nth-child(9) .front { background: url('img/pizzas/especial_2.png') no-repeat center center; background-size: cover; color: #ff0000; font-family: 'Great Vibes', cursive; font-size: 36px; text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0px 0px 15px rgba(0, 0, 0, 0.9); text-indent: 0; }
+        .page:nth-child(9) .back { background: url('img/back_9.png') no-repeat center center; background-size: cover; }
+        .page:nth-child(10) .front { background: url('img/front_10.png') no-repeat center center; background-size: cover; color: #ff0000; font-family: 'Great Vibes', cursive; font-size: 36px; text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0px 0px 15px rgba(0, 0, 0, 0.9); text-indent: 0; }
+        .page:nth-child(10) .back { background: url('img/tapa.png') no-repeat center center; background-size: cover; }
+        .page:nth-child(1) { z-index: 10; }
+        .page:nth-child(2) { z-index: 9; }
+        .page:nth-child(3) { z-index: 8; }
+        .page:nth-child(4) { z-index: 7; }
+        .page:nth-child(5) { z-index: 6; }
+        .page:nth-child(6) { z-index: 5; }
+        .page:nth-child(7) { z-index: 4; }
+        .page:nth-child(8) { z-index: 3; }
+        .page:nth-child(9) { z-index: 2; }
+        .page:nth-child(10) { z-index: 1; }
+        .touch-hint {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            pointer-events: none;
+            z-index: 11;
+        }
+        .hidden { visibility: hidden; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="book" id="book">
+            <div class="page">
+                <div class="front">🍕 Menú de Pizzas</div>
+                <div class="back"></div>
+            </div>
+            <div class="page">
+                <div class="front">
+                    Pizza de Queso
+                    <div class="price" id="price-Pizza de Queso"></div>
+                </div>
+                <div class="back"></div>
+            </div>
+            <div class="page">
+                <div class="front">
+                    Pizza Doble Queso
+                    <div class="price" id="price-Pizza Doble Queso"></div>
+                </div>
+                <div class="back"></div>
+            </div>
+            <div class="page">
+                <div class="front">
+                    Pizza Vegetariana
+                    <div class="price" id="price-Pizza Vegetariana"></div>
+                </div>
+                <div class="back"></div>
+            </div>
+            <div class="page">
+                <div class="front">
+                    Pizza de Queso y Salchicha
+                    <div class="price" id="price-Pizza de Queso y Salchicha"></div>
+                </div>
+                <div class="back"></div>
+            </div>
+            <div class="page">
+                <div class="front">
+                    Pizza Hawaiana
+                    <div class="price" id="price-Pizza Hawaiana"></div>
+                </div>
+                <div class="back"></div>
+            </div>
+            <div class="page">
+                <div class="front">
+                    Pizza de Pollo
+                    <div class="price" id="price-Pizza de Pollo"></div>
+                </div>
+                <div class="back"></div>
+            </div>
+            <div class="page">
+                <div class="front">
+                    Pizza de Jamón
+                    <div class="price" id="price-Pizza de Jamon"></div>
+                </div>
+                <div class="back"></div>
+            </div>
+            <div class="page">
+                <div class="front">
+                    Pizza Especial
+                    <div class="price" id="price-Pizza Especial"></div>
+                </div>
+                <div class="back"></div>
+            </div>
+            <div class="page">
+                <div class="front">
+                    Especial de la Casa
+                    <div class="price" id="price-especial"></div>
+                </div>
+                <div class="back"></div>
+            </div>
+        </div>
+        <div class="touch-hint" id="touch-hint">
+            <lottie-player src="dedo.json" background="transparent" speed="1" style="width: 120px; height: 120px;" loop autoplay></lottie-player>
+        </div>
+    </div>
+
+    <script src="scripts/lottie-player.js"></script>
+    <script src="js/precios.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const precios = pizzaPrecios;
+            for (let pizza in precios) {
+                const priceElement = document.getElementById(`price-${pizza}`);
+                if (priceElement) {
+                    priceElement.textContent = precios[pizza];
+                }
+            }
+        });
+
+        const pages = document.querySelectorAll('.page');
+        const book = document.getElementById('book');
+        const touchHint = document.getElementById('touch-hint');
+        let currentPage = -1;
+        let isDragging = false;
+        let startX;
+        let hasInteracted = false;
+        const isTouchDevice = 'ontouchstart' in window;
+
+        function initializePages() {
+            pages.forEach((page, index) => {
+                page.style.transform = 'rotateY(0deg)';
+                page.style.zIndex = pages.length - index;
+            });
+        }
+
+        function updatePages() {
+            pages.forEach((page, index) => {
+                if (index <= currentPage) {
+                    page.style.transform = 'rotateY(-180deg)';
+                    page.style.zIndex = index + 1;
+                } else {
+                    page.style.transform = 'rotateY(0deg)';
+                    page.style.zIndex = pages.length - index;
+                }
+            });
+        }
+
+        function dragPages(diffX) {
+            if (diffX < 0 && currentPage < pages.length - 1) {
+                const activePage = pages[currentPage + 1];
+                const angle = Math.min(Math.max((diffX / 200) * 180, -180), 0);
+                activePage.style.transition = 'none';
+                activePage.style.transform = `rotateY(${angle}deg)`;
+            } else if (diffX > 0 && currentPage > -1) {
+                const activePage = pages[currentPage];
+                const angle = Math.min(-180 + (diffX / 200) * 180, 0);
+                activePage.style.transition = 'none';
+                activePage.style.transform = `rotateY(${angle}deg)`;
+            }
+        }
+
+        function hideTouchHint() {
+            if (!hasInteracted && isTouchDevice) {
+                touchHint.classList.add('hidden');
+                hasInteracted = true;
+            }
+        }
+
+        book.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startX = e.clientX;
+            e.preventDefault();
+            hideTouchHint();
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            const diffX = e.clientX - startX;
+            dragPages(diffX);
+        });
+
+        document.addEventListener('mouseup', (e) => {
+            if (!isDragging) return;
+            const diffX = e.clientX - startX;
+            if (diffX < 0 && currentPage < pages.length - 1) {
+                const angle = (diffX / 200) * 180;
+                if (angle < -100) {
+                    currentPage++;
+                }
+            } else if (diffX > 0 && currentPage > -1) {
+                const angle = -180 + (diffX / 200) * 180;
+                if (angle > -100) {
+                    currentPage--;
+                }
+            }
+            pages.forEach(page => page.style.transition = 'transform 0.3s ease');
+            updatePages();
+            isDragging = false;
+        });
+
+        book.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            startX = e.touches[0].clientX;
+            e.preventDefault();
+            hideTouchHint();
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            const diffX = e.touches[0].clientX - startX;
+            dragPages(diffX);
+        });
+
+        document.addEventListener('touchend', (e) => {
+            if (!isDragging) return;
+            const diffX = e.changedTouches[0].clientX - startX;
+            if (diffX < 0 && currentPage < pages.length - 1) {
+                const angle = (diffX / 200) * 180;
+                if (angle < -100) {
+                    currentPage++;
+                }
+            } else if (diffX > 0 && currentPage > -1) {
+                const angle = -180 + (diffX / 200) * 180;
+                if (angle > -100) {
+                    currentPage--;
+                }
+            }
+            pages.forEach(page => page.style.transition = 'transform 0.3s ease');
+            updatePages();
+            isDragging = false;
+        });
+
+        if (!isTouchDevice) {
+            touchHint.classList.add('hidden');
+        }
+
+        initializePages();
+    </script>
+</body>
+</html>
