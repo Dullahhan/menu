@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Carta de Pizzas Circular</title>
+    <title>Rincon del Paladar</title>
     <link href="scripts/1.css" rel="stylesheet">
     <style>
         @font-face {
@@ -19,6 +19,7 @@
             height: 100vh;
             margin: 0;
             overflow: hidden;
+            position: relative;
         }
         .container {
             position: relative;
@@ -92,8 +93,8 @@
         .page:nth-child(2) .front { background: url('img/pizzas/queso_2.webp') no-repeat center center; background-size: cover; color: #ff0000; font-family: 'Great Vibes', cursive; font-size: 36px; text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0px 0px 15px rgba(0, 0, 0, 0.9); }
         .page:nth-child(2) .back { background: url('img/pizzas/quesoX2_1.webp') no-repeat center center; background-size: cover; }
         .page:nth-child(3) .front { background: url('img/pizzas/quesoX2_2.webp') no-repeat center center; background-size: cover; color: #ff0000; font-family: 'Great Vibes', cursive; font-size: 36px; text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0px 0px 15px rgba(0, 0, 0, 0.9); text-indent: 0; }
-        .page:nth-child(3) .back { background: url('img/pizzas/vegetariana_1.webp') no-repeat center center; background-size: cover; }
-        .page:nth-child(4) .front { background: url('img/pizzas/vegetariana_2.webp') no-repeat center center; background-size: cover; color: #ff0000; font-family: 'Great Vibes', cursive; font-size: 36px; text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0px 0px 15px rgba(0, 0, 0, 0.9); text-indent: 0; }
+        .page:nth-child(3) .back { background: url('img/pizzas/Vegetariana_1.webp') no-repeat center center; background-size: cover; }
+        .page:nth-child(4) .front { background: url('img/pizzas/Vegetariana_2.webp') no-repeat center center; background-size: cover; color: #ff0000; font-family: 'Great Vibes', cursive; font-size: 36px; text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0px 0px 15px rgba(0, 0, 0, 0.9); text-indent: 0; }
         .page:nth-child(4) .back { background: url('img/pizzas/salchicha_1.webp') no-repeat center center; background-size: cover; }
         .page:nth-child(5) .front { background: url('img/pizzas/salchicha_2.webp') no-repeat center center; background-size: cover; color: #ff0000; font-family: 'Great Vibes', cursive; font-size: 36px; text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0px 0px 15px rgba(0, 0, 0, 0.9); text-indent: 0; }
         .page:nth-child(5) .back { background: url('img/pizzas/hawaiana_1.webp') no-repeat center center; background-size: cover; }
@@ -128,9 +129,42 @@
             z-index: 11;
         }
         .hidden { visibility: hidden; }
+        .home-button {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px 45px;
+            font-size: 26px;
+            font-family: 'Georgia', serif;
+            text-decoration: none;
+            color: #fff;
+            background: linear-gradient(135deg, #d9534f, #c9302c);
+            border-radius: 50px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.35);
+            transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+        }
+        .home-button:hover {
+            transform: translateX(-50%) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(135deg, #c9302c, #d9534f); /* Gradiente invertido */
+        }
+        @media (max-width: 768px) {
+            .home-button {
+                font-size: 22px;
+                padding: 12px 35px;
+            }
+        }
+        @media (max-width: 480px) {
+            .home-button {
+                font-size: 18px;
+                padding: 10px 25px;
+            }
+        }
     </style>
 </head>
 <body>
+    <a href="index.html?noWelcome=true" class="home-button">Volver</a>
     <div class="container">
         <div class="book" id="book">
             <div class="page">
@@ -304,13 +338,13 @@
             isDragging = true;
             startX = e.touches[0].clientX;
             e.preventDefault();
-            hideTouchHint();
         });
 
         document.addEventListener('touchmove', (e) => {
             if (!isDragging) return;
             const diffX = e.touches[0].clientX - startX;
             dragPages(diffX);
+            hideTouchHint();
         });
 
         document.addEventListener('touchend', (e) => {
