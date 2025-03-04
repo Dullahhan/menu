@@ -16,6 +16,6 @@ const pizzaPrecios = {
     "Pizza de Jamon": "1000 cup",
     // Pizza Especial
     "Pizza Especial": "1250 cup",
-    // Especial de la Casa
-    "especial": "$17.00"
+    // Pizza Cuatro Estaciones
+    "Pizza Cuatro Estaciones": "1250 cup"
 };
