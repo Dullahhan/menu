@@ -20,23 +20,24 @@
             margin: 0;
             overflow: hidden;
             flex-direction: column;
-            backdrop-filter: blur(3px); /* Fondo más suave y elegante */
+            backdrop-filter: blur(3px);
         }
         .menu {
-            background: linear-gradient(135deg, rgba(255, 248, 220, 0.95), rgba(245, 222, 179, 0.9)); /* Gradiente cálido */
-            padding: 50px 60px;
+            background: linear-gradient(135deg, rgba(255, 248, 220, 0.95), rgba(245, 222, 179, 0.9));
+            padding: clamp(25px, 5vw, 60px); /* Tamaño dinámico entre un mínimo y máximo */
             border-radius: 25px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25), inset 0 0 15px rgba(255, 255, 255, 0.6); /* Sombra más profunda */
-            max-width: 480px;
-            border: 5px double #8B4513; /* Borde doble más pronunciado */
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25), inset 0 0 15px rgba(255, 255, 255, 0.6);
+            max-width: 90vw; /* Adaptable al ancho de la pantalla */
+            width: clamp(300px, 50vw, 480px); /* Escala entre un mínimo y máximo */
+            border: 5px double #8B4513;
             position: relative;
             animation: fadeIn 1.8s ease-in-out;
-            backdrop-filter: blur(6px); /* Vidrio esmerilado más intenso */
+            backdrop-filter: blur(6px);
         }
         .menu::before, .menu::after {
             content: "✿";
             position: absolute;
-            font-size: 45px;
+            font-size: clamp(30px, 5vw, 45px); /* Tamaño relativo */
             color: #8B4513;
             text-shadow: 0 0 12px rgba(139, 69, 19, 0.6);
         }
@@ -52,11 +53,11 @@
         }
         .menu h2 {
             font-family: 'Great Vibes', cursive;
-            font-size: 54px; /* Más grande y majestuoso */
-            margin-bottom: 30px;
+            font-size: clamp(38px, 8vw, 54px); /* Escala con el tamaño de pantalla */
+            margin-bottom: clamp(20px, 3vw, 30px);
             color: #8B4513;
             text-align: center;
-            text-shadow: 2px 2px 8px rgba(139, 69, 19, 0.4); /* Sombra más rica */
+            text-shadow: 2px 2px 8px rgba(139, 69, 19, 0.4);
             animation: glow 2.5s infinite alternate;
             position: relative;
         }
@@ -66,43 +67,43 @@
             text-align: left;
         }
         .menu li {
-            font-size: 24px; /* Más grande para destacar */
+            font-size: clamp(20px, 4vw, 24px); /* Tamaño dinámico */
             font-family: 'Georgia', serif;
-            padding: 18px 12px;
+            padding: clamp(12px, 2vw, 18px) clamp(8px, 1.5vw, 12px);
             border-bottom: 2px dashed #8B4513;
             color: #5C4033;
             position: relative;
             animation: fadeInUp 0.6s ease-in-out forwards;
             transition: transform 0.4s ease, color 0.4s ease, background 0.4s ease;
-            background: rgba(255, 255, 255, 0.1); /* Fondo sutil para cada item */
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 8px;
-            margin: 5px 0;
+            margin: clamp(3px, 0.5vw, 5px) 0;
         }
         .menu li:hover {
-            transform: translateX(15px) scale(1.02); /* Efecto más dinámico */
+            transform: translateX(15px) scale(1.02);
             color: #8B4513;
-            background: rgba(139, 69, 19, 0.1); /* Toque cálido al hover */
+            background: rgba(139, 69, 19, 0.1);
         }
         .menu li b {
             float: right;
             color: #8B4513;
             font-weight: bold;
-            font-size: 20px;
-            padding-left: 10px;
+            font-size: clamp(16px, 3vw, 20px); /* Escala el precio */
+            padding-left: clamp(5px, 1vw, 10px);
         }
         .menu li:last-child {
             border-bottom: none;
         }
         .menu li::before {
             content: "☕";
-            margin-right: 12px;
+            margin-right: clamp(8px, 1.5vw, 12px);
             color: #8B4513;
-            font-size: 20px;
+            font-size: clamp(16px, 3vw, 20px);
             vertical-align: middle;
             transition: transform 0.4s ease;
         }
         .menu li:hover::before {
-            transform: rotate(360deg); /* Giro completo al hover */
+            transform: rotate(360deg);
         }
 
         .menu li:nth-child(1) { animation-delay: 0.3s; }
@@ -114,6 +115,7 @@
         .menu li:nth-child(7) { animation-delay: 1.2s; }
         .menu li:nth-child(8) { animation-delay: 1.35s; }
 
+        /* Botón Volver sin cambios */
         .home-button {
             position: fixed;
             top: 20px;
@@ -132,38 +134,18 @@
         .home-button:hover {
             transform: translateX(-50%) scale(1.05);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-            background: linear-gradient(135deg, #c9302c, #d9534f); /* Gradiente invertido */
+            background: linear-gradient(135deg, #c9302c, #d9534f);
         }
+
+        /* Media queries simplificadas */
         @media (max-width: 768px) {
-            .home-button {
-                font-size: 22px;
-                padding: 12px 35px;
-            }
-            .menu {
-                max-width: 400px;
-                padding: 35px;
-            }
-            .menu h2 {
-                font-size: 46px;
-            }
-            .menu li {
-                font-size: 22px;
+            .menu::before, .menu::after {
+                font-size: clamp(25px, 4vw, 40px);
             }
         }
         @media (max-width: 480px) {
-            .home-button {
-                font-size: 18px;
-                padding: 10px 25px;
-            }
-            .menu {
-                max-width: 340px;
-                padding: 25px;
-            }
-            .menu h2 {
-                font-size: 38px;
-            }
-            .menu li {
-                font-size: 20px;
+            .menu::before, .menu::after {
+                font-size: clamp(20px, 3vw, 35px);
             }
         }
 
