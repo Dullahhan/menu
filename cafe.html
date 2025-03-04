@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Rincón del Paladar</title>
+    <link href="scripts/1.css" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'Great Vibes';
+            src: url('fonts/letra.woff2') format('truetype');
+        }
+        body {
+            background: url('img/mesa.webp') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            flex-direction: column;
+            backdrop-filter: blur(3px); /* Fondo más suave y elegante */
+        }
+        .menu {
+            background: linear-gradient(135deg, rgba(255, 248, 220, 0.95), rgba(245, 222, 179, 0.9)); /* Gradiente cálido */
+            padding: 50px 60px;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25), inset 0 0 15px rgba(255, 255, 255, 0.6); /* Sombra más profunda */
+            max-width: 480px;
+            border: 5px double #8B4513; /* Borde doble más pronunciado */
+            position: relative;
+            animation: fadeIn 1.8s ease-in-out;
+            backdrop-filter: blur(6px); /* Vidrio esmerilado más intenso */
+        }
+        .menu::before, .menu::after {
+            content: "✿";
+            position: absolute;
+            font-size: 45px;
+            color: #8B4513;
+            text-shadow: 0 0 12px rgba(139, 69, 19, 0.6);
+        }
+        .menu::before {
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .menu::after {
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%) rotate(180deg);
+        }
+        .menu h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 54px; /* Más grande y majestuoso */
+            margin-bottom: 30px;
+            color: #8B4513;
+            text-align: center;
+            text-shadow: 2px 2px 8px rgba(139, 69, 19, 0.4); /* Sombra más rica */
+            animation: glow 2.5s infinite alternate;
+            position: relative;
+        }
+        .menu ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+        .menu li {
+            font-size: 24px; /* Más grande para destacar */
+            font-family: 'Georgia', serif;
+            padding: 18px 12px;
+            border-bottom: 2px dashed #8B4513;
+            color: #5C4033;
+            position: relative;
+            animation: fadeInUp 0.6s ease-in-out forwards;
+            transition: transform 0.4s ease, color 0.4s ease, background 0.4s ease;
+            background: rgba(255, 255, 255, 0.1); /* Fondo sutil para cada item */
+            border-radius: 8px;
+            margin: 5px 0;
+        }
+        .menu li:hover {
+            transform: translateX(15px) scale(1.02); /* Efecto más dinámico */
+            color: #8B4513;
+            background: rgba(139, 69, 19, 0.1); /* Toque cálido al hover */
+        }
+        .menu li b {
+            float: right;
+            color: #8B4513;
+            font-weight: bold;
+            font-size: 20px;
+            padding-left: 10px;
+        }
+        .menu li:last-child {
+            border-bottom: none;
+        }
+        .menu li::before {
+            content: "☕";
+            margin-right: 12px;
+            color: #8B4513;
+            font-size: 20px;
+            vertical-align: middle;
+            transition: transform 0.4s ease;
+        }
+        .menu li:hover::before {
+            transform: rotate(360deg); /* Giro completo al hover */
+        }
+
+        .menu li:nth-child(1) { animation-delay: 0.3s; }
+        .menu li:nth-child(2) { animation-delay: 0.45s; }
+        .menu li:nth-child(3) { animation-delay: 0.6s; }
+        .menu li:nth-child(4) { animation-delay: 0.75s; }
+        .menu li:nth-child(5) { animation-delay: 0.9s; }
+        .menu li:nth-child(6) { animation-delay: 1.05s; }
+        .menu li:nth-child(7) { animation-delay: 1.2s; }
+        .menu li:nth-child(8) { animation-delay: 1.35s; }
+
+        .home-button {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px 45px;
+            font-size: 26px;
+            font-family: 'Georgia', serif;
+            text-decoration: none;
+            color: #fff;
+            background: linear-gradient(135deg, #d9534f, #c9302c);
+            border-radius: 50px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.35);
+            transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+        }
+        .home-button:hover {
+            transform: translateX(-50%) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(135deg, #c9302c, #d9534f); /* Gradiente invertido */
+        }
+        @media (max-width: 768px) {
+            .home-button {
+                font-size: 22px;
+                padding: 12px 35px;
+            }
+            .menu {
+                max-width: 400px;
+                padding: 35px;
+            }
+            .menu h2 {
+                font-size: 46px;
+            }
+            .menu li {
+                font-size: 22px;
+            }
+        }
+        @media (max-width: 480px) {
+            .home-button {
+                font-size: 18px;
+                padding: 10px 25px;
+            }
+            .menu {
+                max-width: 340px;
+                padding: 25px;
+            }
+            .menu h2 {
+                font-size: 38px;
+            }
+            .menu li {
+                font-size: 20px;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.85); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 5px rgba(139, 69, 19, 0.5); }
+            to { text-shadow: 0 0 20px rgba(139, 69, 19, 0.9); }
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html?noWelcome=true" class="home-button">Volver</a>
+    
+    <div class="menu">
+        <h2>✿ Menú de Cafés ✿</h2>
+        <ul>
+            <li>Café Simple <b>50 cup</b></li>
+            <li>Café Helado <b>50 cup</b></li>
+            <li>Café Cortado <b>80 cup</b></li>
+            <li>Café con Leche <b>150 cup</b></li>
+            <li>Café Latte <b>150 cup</b></li>
+            <li>Café Bombón <b>150 cup</b></li>
+            <li>Café Frappé <b>250 cup</b></li>
+            <li>Café Dalgona <b>300 cup</b></li>
+        </ul>
+    </div>
+</body>
+</html>
